@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alejoows</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            background-color: #cbd5e1;
+            color: #1e293b;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .background-blur {
+            position: fixed;
+            top: -20px; left: -20px; right: -20px; bottom: -20px;
+            background-image: url('https://i.postimg.cc/sDtHKcYh/9861649720f868c14c22dc3fcf648058.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: blur(14px);
+            transform: scale(1.06);
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        .profile-img {
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            background-image: url('https://i.postimg.cc/xCqRyJF7/ad10f3a565cb234d6e31040e563bfd97.jpg'); 
+            background-size: cover;
+            background-position: center;
+            border: 3px solid rgba(255, 255, 255, 0.75);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0 0 45px 0;
+            letter-spacing: -0.8px;
+            color: #0f172a;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .sections-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            width: 100%;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.35); 
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4), 
+                        0 10px 25px rgba(15, 23, 42, 0.05);
+            border-radius: 22px;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .link-btn {
+            text-decoration: none;
+            color: #1e293b;
+            padding: 18px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .link-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .link-content i {
+            font-size: 1.3rem;
+            width: 32px;
+            text-align: left;
+            color: #6366f1;
+            transition: transform 0.3s ease;
+        }
+
+        .roblox-svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            fill: #6366f1;
+            transition: fill 0.3s ease, transform 0.3s ease;
+        }
+
+        .link-text {
+            flex-grow: 1;
+            text-align: center;
+            margin-right: 32px;
+            letter-spacing: 0.4px;
+        }
+
+        .glass-panel.link-card:hover {
+            background: rgba(255, 255, 255, 0.55);
+            transform: translateY(-4px);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6), 
+                        0 15px 32px rgba(15, 23, 42, 0.1);
+        }
+
+        .glass-panel.link-card:hover i {
+            transform: scale(1.15);
+        }
+
+        .glass-panel.link-card:hover .roblox-svg {
+            fill: #4f46e5;
+            transform: scale(1.15) rotate(4deg);
+        }
+
+        .player-container {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .track-info {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 16px;
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .cover-wrapper {
+            width: 68px;
+            height: 68px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+        }
+
+        .track-cover {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.4s ease, opacity 0.25s ease;
+        }
+
+        .track-text {
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        .animated-text {
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        
+        .text-changing {
+            opacity: 0;
+            transform: translateY(3px);
+        }
+
+        .track-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0f172a;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .track-status {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: #475569;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+        }
+
+        .control-btn:hover {
+            color: #6366f1;
+            background: rgba(255, 255, 255, 0.45);
+            transform: scale(1.08);
+        }
+
+        .control-btn.play-idx {
+            font-size: 1.4rem;
+            background: rgba(255, 255, 255, 0.65);
+            color: #6366f1;
+            width: 52px;
+            height: 52px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .control-btn.play-idx:hover {
+            transform: scale(1.1);
+            background: #ffffff;
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-blur"></div>
+
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-img"></div>
+        </div>
+        
+        <h1>alejoows</h1> 
+
+        <div class="sections-wrapper">
+            <div class="links-container">
+                <!-- TikTok -->
+                <div class="glass-panel link-card">
+                    <a href="https://www.tiktok.com/@alejoows" target="_blank" class="link-btn">
+                        <div class="link-content">
+                            <i class="fab fa-tiktok"></i>
+                            <span class="link-text">TikTok</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Instagram -->
+                <div class="glass-panel link-card">
+                    <a href="https://www.instagram.com/alejoows" target="_blank" class="link-btn">
+                        <div class="link-content">
+                            <i class="fab fa-instagram"></i>
+                            <span class="link-text">Instagram</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Roblox -->
+                <div class="glass-panel link-card">
+                    <a href="https://www.roblox.com/es/users/5749966842/profile" target="_blank" class="link-btn">
+                        <div class="link-content">
+                            <svg class="roblox-svg" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M189.7 218.3L37.7 177.6c-5.2-1.4-8.3-6.8-6.9-12L71.5 13.7c1.4-5.2 6.8-8.3 12-6.9l152 40.7c5.2 1.4 8.3 6.8 6.9 12l-40.7 151.9c-1.4 5.2-6.8 8.3-12 6.9zm-55.4-118l-38-10.2-10.2 38 38 10.2 10.2-38z"/>
+                            </svg>
+                            <span class="link-text">Roblox</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reproductor -->
+            <div class="glass-panel player-container">
+                <div class="track-info">
+                    <div class="cover-wrapper">
+                        <div id="cover" class="track-cover"></div>
+                    </div>
+                    <div class="track-text">
+                        <div id="title" class="track-title animated-text">Cargando...</div>
+                        <div id="status" class="track-status animated-text">Pausado</div>
+                    </div>
+                </div>
+                
+                <div class="player-controls">
+                    <button class="control-btn" onclick="prevTrack()"><i class="fas fa-backward"></i></button>
+                    <button class="control-btn play-idx" id="playBtn" onclick="togglePlay()"><i class="fas fa-play"></i></button>
+                    <button class="control-btn" onclick="nextTrack()"><i class="fas fa-forward"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const playlist = [
+            {
+                titulo: "RUNAWAY", 
+                url: "https://files.catbox.moe/47n050.mp3", 
+                portada: "https://i.postimg.cc/JzZ40pr9/ad26202c265fccc74e5a5b4a754d7190.jpg"
+            },
+            {
+                titulo: "Leni (Crystal Castles vs GoodBooks)", 
+                url: "https://files.catbox.moe/1kldwc.mp3", 
+                portada: "https://i.postimg.cc/cJTWtjV9/7ab9e7f9ce15395e67d24d6721c8c97a.jpg"
+            },
+            {
+                titulo: "4 Morant", 
+                url: "https://files.catbox.moe/vs9wbu.mp3", 
+                portada: "https://i.postimg.cc/prjXjCQh/66cb84ed609c98fb54228174c482a4fe.jpg"
+            },
+            {
+                titulo: "Oblivion", 
+                url: "https://files.catbox.moe/f5g1qa.mp3", 
+                portada: "https://i.postimg.cc/Y9GpcRPM/fba5d91ad47954e008ac2cbfac6eb43d.jpg"
+            }
+        ];
+
+        let currentIdx = 0;
+        const audio = new Audio();
+        
+        const coverEl = document.getElementById('cover');
+        const titleEl = document.getElementById('title');
+        const statusEl = document.getElementById('status');
+        const playBtnEl = document.getElementById('playBtn');
+
+        function renderPlayerState(track, isPlaying) {
+            titleEl.classList.add('text-changing');
+            statusEl.classList.add('text-changing');
+            coverEl.style.opacity = '0.3';
+
+            setTimeout(() => {
+                titleEl.textContent = track.titulo;
+                statusEl.textContent = isPlaying ? "Reproduciendo" : "Pausado";
+                statusEl.style.color = isPlaying ? "#6366f1" : "#64748b";
+                coverEl.style.backgroundImage = `url('${track.portada}')`;
+                
+                titleEl.classList.remove('text-changing');
+                statusEl.classList.remove('text-changing');
+                coverEl.style.opacity = '1';
+            }, 200);
+        }
+
+        function loadTrack(idx, startPlaying = false) {
+            currentIdx = idx;
+            const track = playlist[currentIdx];
+            audio.src = track.url;
+            
+            if (titleEl.textContent === "Cargando...") {
+                titleEl.textContent = track.titulo;
+                coverEl.style.backgroundImage = `url('${track.portada}')`;
+            } else {
+                renderPlayerState(track, startPlaying);
+            }
+
+            if (startPlaying) {
+                setTimeout(() => {
+                    audio.play().catch(e => console.log("Interacción requerida"));
+                    playBtnEl.innerHTML = '<i class="fas fa-pause"></i>';
+                }, 220);
+            }
+        }
+
+        function togglePlay() {
+            const track = playlist[currentIdx];
+            if (audio.paused) {
+                audio.play();
+                statusEl.textContent = "Reproduciendo";
+                statusEl.style.color = "#6366f1";
+                playBtnEl.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                audio.pause();
+                statusEl.textContent = "Pausado";
+                statusEl.style.color = "#64748b";
+                playBtnEl.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        function nextTrack() {
+            const wasPlaying = !audio.paused;
+            const nextIdx = (currentIdx + 1) % playlist.length;
+            loadTrack(nextIdx, wasPlaying);
+        }
+
+        function prevTrack() {
+            const wasPlaying = !audio.paused;
+            const prevIdx = (currentIdx - 1 + playlist.length) % playlist.length;
+            loadTrack(prevIdx, wasPlaying);
+        }
+
+        audio.addEventListener('ended', () => {
+            nextTrack();
+        });
+
+        loadTrack(0, false);
+    </script>
+</body>
+</html>
